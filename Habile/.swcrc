@@ -1,0 +1,18 @@
+{
+  "test": ".*.ts$",
+  "exclude": "node_modules",
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true,
+      "trailingCommas": true
+    },
+    "target": "es2022"
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": true
+  }
+}

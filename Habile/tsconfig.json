@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "ESNext",
+    "checkJs": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "strict": true,
+    "strictNullChecks": true,
+    "outDir": "./dist",
+    "downlevelIteration": true,
+    "removeComments": true,
+    "rootDir": "src",
+    "baseUrl": "src",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

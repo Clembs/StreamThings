@@ -1,0 +1,26 @@
+{
+  "name": "twitch-bot",
+  "version": "1.0.0",
+  "description": "A twitch bot for Clembs",
+  "scripts": {
+    "start": "yarn build && yarn dist",
+    "dist": "node dist",
+    "build": "yarn swc src -d dist",
+    "watch": "node scripts/watch.mjs"
+  },
+  "author": "Clembs",
+  "license": "null",
+  "private": true,
+  "dependencies": {
+    "@types/node": "^17.0.8",
+    "dotenv": "^11.0.0",
+    "tmi.js": "^1.8.5"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.55",
+    "@swc/core": "^1.2.131",
+    "@types/tmi.js": "^1.8.1",
+    "chokidar": "^3.5.3",
+    "regenerator-runtime": "^0.13.9"
+  }
+}
