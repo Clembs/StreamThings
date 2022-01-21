@@ -1,11 +1,13 @@
 import { Client } from "tmi.js";
 import "dotenv/config";
-import { CommandStorage } from "./core/types/CommandStorage";
-import { CommandData } from "./core/Command";
+import { CommandStorage, Command } from "./core/types";
 import { handleCommand } from "./core/handleCommand";
 import { loadCommands } from "./core/loadCommands";
 
-const handler: CommandStorage = new Map<string, CommandData>();
+export const handler: CommandStorage = {
+  commands: new Map<string, Command>(),
+  prefix: ",",
+};
 
 const client = new Client({
   identity: {
@@ -28,12 +30,12 @@ client.connect();
 client.on("connected", async (address, port) => {
   console.log(`Connected to Twitch.tv at ${address}:${port}`);
   await loadCommands(`${__dirname}/commands`, handler).then((handler) => {
-    console.log(`Loaded ${handler.size} commands.`);
+    console.log(`Loaded ${handler.commands.size} commands.`);
     console.log(handler);
   });
 });
 
-client.on("message", (channel, user, message, self) => {
+client.on("message", (channel, state, message, self) => {
   if (self) return;
-  else handleCommand({ channel, user, message, client, self }, handler);
+  else handleCommand({ channel, state, message, client, self }, handler);
 });

@@ -1,6 +1,6 @@
-import { CommandData } from "../Command";
+import { Command } from ".";
 
-export type CommandStorage = Map<string, CommandData>;
+export type CommandStorage = { commands: Map<string, Command>; prefix: string };
 
 // export class CommandStorage extends Map {
 

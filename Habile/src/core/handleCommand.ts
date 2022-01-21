@@ -1,33 +1,26 @@
-import { CommandHandleOptions, CommandOptions } from "./Command";
-import { CommandStorage } from "./types/CommandStorage";
+import { resolveCommandData } from "./resolveCommandData";
+import { CommandHandleOptions, CommandStorage } from "./types";
 
 export const handleCommand = async (
-  { channel, message, user, client }: CommandHandleOptions,
+  opts: CommandHandleOptions,
   handler: CommandStorage
 ): Promise<void> => {
-  const prefix = ".";
+  const { channel, message, client } = opts;
+
   const args =
     message.trim().split(/\s+/g).slice(1).length !== 0
       ? message.trim().split(/\s+/g).slice(1)
       : undefined;
-  const cmdName = message.trim().split(/\s+/g)[0];
-
-  const commandOptions: CommandOptions = {
-    channel,
-    user,
-    client,
-    reply: (message: string): void => {
-      client.say(channel, message);
-    },
-    rawContent: message,
-    args,
-  };
+  const commandName = message.trim().split(/\s+/g)[0];
+  const commandData = resolveCommandData(opts, handler, commandName, args);
 
   try {
-    if (cmdName.startsWith(prefix)) {
-      const command = handler.get(cmdName.slice(prefix.length));
+    if (commandName.startsWith(handler.prefix)) {
+      const command = handler.commands.get(
+        commandName.slice(handler.prefix.length)
+      );
       if (command) {
-        await command.handle.call(commandOptions, args);
+        await command.handle.call(commandData, args);
       }
     }
   } catch (e) {
