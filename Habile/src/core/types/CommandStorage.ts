@@ -1,7 +1,10 @@
 import { Command } from ".";
 
-export type CommandStorage = { commands: Map<string, Command>; prefix: string };
+export class CommandStorage {
+  public commands = new Map<string, Command>();
+  public prefix = ",";
 
-// export class CommandStorage extends Map {
-
-// }
+  add(name: string, command: Command) {
+    this.commands.set(name, command);
+  }
+}

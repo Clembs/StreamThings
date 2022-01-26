@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "Node",
     "strict": true,
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "outDir": "./dist",
     "downlevelIteration": true,
     "removeComments": true,

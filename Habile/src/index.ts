@@ -1,13 +1,12 @@
 import { Client } from "tmi.js";
 import "dotenv/config";
-import { CommandStorage, Command } from "./core/types";
+import { CommandStorage } from "./core/types";
 import { handleCommand } from "./core/handleCommand";
 import { loadCommands } from "./core/loadCommands";
+import { Poll } from "./core/classes/Poll";
 
-export const handler: CommandStorage = {
-  commands: new Map<string, Command>(),
-  prefix: ",",
-};
+export const handler = new CommandStorage();
+export const poll = new Poll();
 
 const client = new Client({
   identity: {

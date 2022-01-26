@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "@types/node": "^17.0.8",
+    "canvas": "^2.9.0",
     "dotenv": "^11.0.0",
     "tmi.js": "^1.8.5"
   },
