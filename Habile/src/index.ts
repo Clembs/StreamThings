@@ -1,9 +1,7 @@
 import { Client } from "tmi.js";
 import "dotenv/config";
-import { CommandStorage } from "./core/types";
-import { handleCommand } from "./core/handleCommand";
-import { loadCommands } from "./core/loadCommands";
-import { Poll } from "./core/classes/Poll";
+import { CommandStorage, Poll } from "./core/classes";
+import { loadCommands, handleCommand } from "./core/functions";
 
 export const handler = new CommandStorage();
 export const poll = new Poll();

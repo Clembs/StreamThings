@@ -1,5 +1,6 @@
 import { resolveCommandData } from "./resolveCommandData";
-import { CommandHandleOptions, CommandStorage } from "./types";
+import { CommandHandleOptions } from "../types";
+import { CommandStorage } from "../classes";
 
 export const handleCommand = async (
   opts: CommandHandleOptions,

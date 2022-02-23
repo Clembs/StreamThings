@@ -1,4 +1,4 @@
-import { reloadPollDisplay } from "../functions/reloadPollDisplay";
+import { refreshPollImg } from "../functions";
 
 export class Poll {
   public title: string = "";
@@ -6,28 +6,33 @@ export class Poll {
     name: string;
     votes: number;
   }[] = [];
-  public optionNames: string[] = [];
   public voters: string[] = [];
+  public created = false;
 
   public init = (title: string, options: string[]) => {
     this.title = title;
-    this.optionNames = this.options.map((opt) => opt.name);
     options.forEach((option) => {
       this.options.push({ name: option, votes: 0 });
     });
-    console.log(this);
-    reloadPollDisplay(this);
+    this.created = true;
+    refreshPollImg(this);
     return this;
   };
 
   public vote(user: string, option: string) {
-    this.options.forEach((opt) => {
-      if (opt.name === option) {
-        opt.votes++;
-      }
-    });
-    this.voters.push(user);
-    reloadPollDisplay(this);
+    if (this.options.map(({ name }) => name).includes(option)) {
+      this.options.find(({ name }) => name === option).votes++;
+      this.voters.push(user);
+      refreshPollImg(this);
+      return this;
+    } else {
+      throw new Error("Option does not exist!");
+    }
+  }
+
+  public end() {
+    this.created = false;
+    refreshPollImg(this);
     return this;
   }
 }

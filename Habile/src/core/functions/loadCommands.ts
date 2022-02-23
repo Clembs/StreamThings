@@ -1,5 +1,6 @@
 import { readdirSync, statSync } from "fs";
-import { Command, CommandStorage } from "./types";
+import { Command } from "../types";
+import { CommandStorage } from "../classes";
 
 export const loadCommands = async (folder: string, handler: CommandStorage) => {
   const files = readdirSync(folder);
