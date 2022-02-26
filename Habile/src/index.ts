@@ -2,7 +2,6 @@ import { Client } from 'tmi.js';
 import 'dotenv/config';
 import { CommandStorage, Poll } from './core/classes';
 import { loadCommands, handleCommand, fetchUser } from './core/functions';
-import { addPersonToCanvas } from './core/functions/addPersonToCanvas';
 import fetch from 'node-fetch';
 
 export const handler = new CommandStorage();
@@ -47,8 +46,15 @@ client.on('message', async (channel, state, message, self) => {
         avatar: await fetchUser(state.username).then((u) => u.profileImage),
       }),
     });
-    console.log(await req.json());
-    // addPersonToCanvas(await fetchUser(state.username));
+    // console.log(await req.json());
   }
   handleCommand({ channel, state, message, client, self }, handler);
 });
+
+// client.on('join', (channel, username, self) => {
+//   console.log(username, channel);
+// });
+
+// client.on('action', (channel, state, action) => {
+//   console.log(state, action, channel);
+// });

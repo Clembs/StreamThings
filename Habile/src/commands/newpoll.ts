@@ -1,15 +1,16 @@
-import { handler, poll } from "..";
-import { Command } from "../core/types/Command";
+import { handler, poll } from '..';
+import { Command } from '../core/types/Command';
 
 export = {
-  name: "newpoll",
+  name: 'newpoll',
   async handle(args) {
-    if (this.viewer.username !== "clembs") return;
+    if (this.viewer.username !== 'clembs') return;
     else {
-      const question = args.join(" ").split("/")[0].trim();
+      const question = args.join(' ').split('/')[0].trim();
       const options = args
-        .join(" ")
-        .split("/")
+        .join(' ')
+        .split('/')
+        .slice(1)
         .map((opt) => opt.trim());
       if (question && options) {
         poll.init(question, options);

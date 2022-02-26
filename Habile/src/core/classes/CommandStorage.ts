@@ -1,8 +1,8 @@
-import { Command } from "../types";
+import { Command } from '../types';
 
 export class CommandStorage {
   public commands = new Map<string, Command>();
-  public prefix = ",";
+  public prefix = ',';
 
   add(name: string, command: Command) {
     this.commands.set(name, command);

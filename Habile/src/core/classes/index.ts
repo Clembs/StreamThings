@@ -1,2 +1,2 @@
-export * from "./CommandStorage";
-export * from "./Poll";
+export * from './CommandStorage';
+export * from './Poll';

@@ -1,7 +1,7 @@
-import { Command } from "core/types";
+import { Command } from 'core/types';
 
 export = {
-  name: "whoami",
+  name: 'whoami',
   async handle() {
     this.reply(
       `${this.viewer.displayName} (${this.viewer.id}) - ${this.viewer.type} - ${this.viewer.color}`

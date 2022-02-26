@@ -3,9 +3,9 @@ import {
   CommandHandleOptions,
   RawMessageContent,
   User,
-} from "../types";
-import { CommandStorage } from "../classes";
-import fetch from "node-fetch";
+} from '../types';
+import { CommandStorage } from '../classes';
+import fetch from 'node-fetch';
 
 export const resolveCommandData = (
   opts: CommandHandleOptions,
@@ -18,18 +18,18 @@ export const resolveCommandData = (
     channel,
     viewer: {
       color: (state.color as `#${string}`) ?? undefined,
-      displayName: state["display-name"],
+      displayName: state['display-name'],
       username: state.username as string,
-      id: state["user-id"] as string,
-      type: state.type ?? "viewer",
+      id: state['user-id'] as string,
+      type: state.type ?? 'viewer',
       subscriber: state.subscriber ?? false,
       mod: state.mod ?? false,
       turbo: state.turbo ?? false,
       fetchUser: async () =>
         (await fetchUser(state.username as string)) as User,
     },
-    timestamp: new Date(parseInt(state["tmi-sent-ts"])),
-    type: state["message-type"] as "whisper" | "chat" | "action",
+    timestamp: new Date(parseInt(state['tmi-sent-ts'])),
+    type: state['message-type'] as 'whisper' | 'chat' | 'action',
     client: Object.assign(client, {
       fetchUser,
     }),
@@ -49,7 +49,7 @@ export const fetchUser = async (username: string): Promise<User> => {
     {
       headers: {
         Authorization: `Bearer ${process.env.ACCESS_TOKEN}`,
-        "Client-Id": process.env.CLIENT_ID,
+        'Client-Id': process.env.CLIENT_ID,
       },
     }
   );

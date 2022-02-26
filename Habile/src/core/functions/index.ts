@@ -1,4 +1,3 @@
-export * from "./handleCommand";
-export * from "./loadCommands";
-export * from "./refreshPollImg";
-export * from "./resolveCommandData";
+export * from './handleCommand';
+export * from './loadCommands';
+export * from './resolveCommandData';

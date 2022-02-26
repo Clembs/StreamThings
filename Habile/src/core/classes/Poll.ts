@@ -1,7 +1,7 @@
-import { refreshPollImg } from "../functions/refreshPollImg";
+import fetch from 'node-fetch';
 
 export class Poll {
-  public title: string = "";
+  public title: string = '';
   public options: {
     name: string;
     votes: number;
@@ -15,24 +15,42 @@ export class Poll {
       this.options.push({ name: option, votes: 0 });
     });
     this.created = true;
-    refreshPollImg(this);
+    this.post();
     return this;
   }
 
-  public vote(user: string, option: string) {
-    if (this.options.map(({ name }) => name).includes(option)) {
-      this.options.find(({ name }) => name === option).votes++;
+  public vote(user: string, optionIndex: string) {
+    if (optionIndex.toUpperCase().charCodeAt(0) - 65 < this.options.length) {
+      this.options[optionIndex.toUpperCase().charCodeAt(0) - 65].votes++;
       this.voters.push(user);
-      refreshPollImg(this);
+      this.post();
       return this;
     } else {
-      throw new Error("Option does not exist!");
+      throw new Error('Option does not exist!');
     }
   }
 
   public end() {
     this.created = false;
-    refreshPollImg(this);
-    return this;
+    this.title = '';
+    this.options = [];
+    this.voters = [];
+    this.post();
+  }
+
+  public toJSON() {
+    return {
+      title: this.title,
+      options: this.options,
+      voters: this.voters,
+      created: this.created,
+    };
+  }
+
+  public async post() {
+    await fetch('http://localhost:3000/api/updatePoll', {
+      method: 'POST',
+      body: JSON.stringify(this.toJSON()),
+    });
   }
 }

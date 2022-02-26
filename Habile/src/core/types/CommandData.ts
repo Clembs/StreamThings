@@ -1,5 +1,5 @@
-import { Client } from "tmi.js";
-import { CommandHandleOptions } from ".";
+import { Client } from 'tmi.js';
+import { CommandHandleOptions } from '.';
 
 export type RawMessageContent = string;
 
@@ -7,11 +7,11 @@ export interface BaseUser {
   username: string;
   displayName: string;
   id: string;
-  type: "viewer" | "mod" | "global_mod" | "admin" | "staff";
+  type: 'viewer' | 'mod' | 'global_mod' | 'admin' | 'staff';
   fetchUser: (username: string) => Promise<User>;
 }
 
-export type Viewer = Omit<BaseUser, "fetchUser"> & {
+export type Viewer = Omit<BaseUser, 'fetchUser'> & {
   color?: `#${string}`;
   subscriber: boolean;
   turbo: boolean;
@@ -21,8 +21,8 @@ export type Viewer = Omit<BaseUser, "fetchUser"> & {
   // timeout: (duration: number, reason: string) => Promise<void>;
 };
 
-export type User = Omit<BaseUser, "type" | "fetchUser"> & {
-  type: "";
+export type User = Omit<BaseUser, 'type' | 'fetchUser'> & {
+  type: '';
   description: string;
   profileImage: string;
   bannerImage: string;
@@ -32,14 +32,14 @@ export type User = Omit<BaseUser, "type" | "fetchUser"> & {
 
 export type CommandData = Omit<
   CommandHandleOptions,
-  "message" | "self" | "state" | "client"
+  'message' | 'self' | 'state' | 'client'
 > & {
   client: Client & {
     fetchUser: (username: string) => Promise<User>;
   };
   viewer: Viewer;
   id?: string;
-  type: "whisper" | "chat" | "action";
+  type: 'whisper' | 'chat' | 'action';
   commandName: string;
   rawContent: RawMessageContent;
   reply: (message: string) => Promise<[RawMessageContent]>;

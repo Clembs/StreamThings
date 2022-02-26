@@ -1,0 +1,16 @@
+{
+  "name": "streamthings",
+  "private": true,
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"yarn habile\" \"yarn plugins\"",
+    "habile": "yarn workspace habile start",
+    "plugins": "yarn workspace plugins dev"
+  },
+  "workspaces": [
+    "Habile",
+    "PluginRenderer"
+  ],
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

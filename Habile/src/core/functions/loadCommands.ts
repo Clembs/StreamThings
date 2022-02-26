@@ -1,6 +1,6 @@
-import { readdirSync, statSync } from "fs";
-import { Command } from "../types";
-import { CommandStorage } from "../classes";
+import { readdirSync, statSync } from 'fs';
+import { Command } from '../types';
+import { CommandStorage } from '../classes';
 
 export const loadCommands = async (folder: string, handler: CommandStorage) => {
   const files = readdirSync(folder);
@@ -16,7 +16,9 @@ export const loadCommands = async (folder: string, handler: CommandStorage) => {
       if (handler.commands.has(command.name)) {
         throw new Error(`Command ${command.name} already exists`);
       }
-      handler.add(command.name, command);
+      if (command.name) {
+        handler.add(command.name, command);
+      }
     }
   }
   return handler;

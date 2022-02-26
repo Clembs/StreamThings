@@ -2,40 +2,49 @@
 	export const load: Load = async ({ fetch }) => {
 		const people = await fetch('/api/getPeople').then((r) => r.json());
 		return {
-			props: {
-				people
-			}
+			props: { people },
 		};
 	};
 </script>
 
 <script lang="ts">
-	import { fade } from 'svelte/transition';
+	import { scale } from 'svelte/transition';
 	import type { Load } from '@sveltejs/kit';
 	import { browser } from '$app/env';
+	import { linear } from 'svelte/easing';
 	export let people;
 
 	if (browser) {
 		setInterval(async () => {
 			people = await fetch('/api/getPeople').then((r) => r.json());
-		}, 300);
+		}, 2000);
 	}
-
-	// people.subscribe((p) => {
-	// 	ppl = p;
-	// });
 </script>
 
-<main class="bg-green-500">
-	<div class="flex flex-row gap-2">
-		{#each people as { name, avatar }}
-			<img class="rounded-full h-24" src={avatar} alt={name} />
-		{/each}
-	</div>
+<main class="aspect-video image bg-contain">
+	{#each people as { name, avatar, x, y, s }}
+		<img
+			transition:scale={{
+				duration: 500,
+				easing: linear,
+				opacity: 0,
+			}}
+			style="
+			position: absolute;
+			left: {x}px;
+			top: {y}px;
+			height: {s}px;
+			width: {s}px;
+				"
+			class="shadow-xl rounded-full h-12"
+			src={avatar}
+			alt={name}
+		/>
+	{/each}
 </main>
 
-<style>
-	main {
-		height: 100vh;
+<style lang="scss">
+	.image {
+		background-image: url('/assets/starting-soon.png');
 	}
 </style>
