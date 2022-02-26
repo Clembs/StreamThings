@@ -8,11 +8,11 @@ export = {
       this.reply("You need to specify an option to vote for!");
     } else if (!poll.created) {
       this.reply("There is no poll to vote for!");
-    } else if (poll.voters.includes(this.user.username)) {
+    } else if (poll.voters.includes(this.viewer.username)) {
       this.reply("You have already voted!");
     } else {
       try {
-        poll.vote(this.user.username, args.join(" "));
+        poll.vote(this.viewer.username, args.join(" "));
         this.reply(`You voted for ${args.join(" ")}!`);
       } catch (e) {
         this.reply(String(e));

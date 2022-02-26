@@ -8,18 +8,20 @@ export interface BaseUser {
   displayName: string;
   id: string;
   type: "viewer" | "mod" | "global_mod" | "admin" | "staff";
+  fetchUser: (username: string) => Promise<User>;
 }
 
-export type Viewer = BaseUser & {
+export type Viewer = Omit<BaseUser, "fetchUser"> & {
   color?: `#${string}`;
   subscriber: boolean;
   turbo: boolean;
   mod: boolean;
+  fetchUser: () => Promise<User>;
   // ban: (reason: string) => Promise<void>;
   // timeout: (duration: number, reason: string) => Promise<void>;
 };
 
-export type User = Omit<BaseUser, "type"> & {
+export type User = Omit<BaseUser, "type" | "fetchUser"> & {
   type: "";
   description: string;
   profileImage: string;
@@ -35,7 +37,7 @@ export type CommandData = Omit<
   client: Client & {
     fetchUser: (username: string) => Promise<User>;
   };
-  user: Viewer;
+  viewer: Viewer;
   id?: string;
   type: "whisper" | "chat" | "action";
   commandName: string;

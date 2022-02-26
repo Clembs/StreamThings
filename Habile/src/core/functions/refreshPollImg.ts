@@ -1,8 +1,8 @@
-import { createWriteStream } from "fs";
+import { createWriteStream, readFileSync } from "fs";
 import { Poll } from "../classes/Poll";
 import { Canvas } from "canvas";
 
-export const refreshPollImg = (poll: Poll) => {
+export const refreshPollImg = async (poll: Poll) => {
   console.log(poll);
   const canvas = new Canvas(500, 500);
   const ctx = canvas.getContext("2d");
@@ -15,6 +15,7 @@ export const refreshPollImg = (poll: Poll) => {
   ctx.fillText(poll.title, 10, 50);
 
   poll.options.forEach((opt, index) => {
+    console.log(opt);
     ctx.fillStyle = "black";
     ctx.font = "13px Arial";
     ctx.fillText(opt.name, 10, 100 + 50);

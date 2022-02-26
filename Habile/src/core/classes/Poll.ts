@@ -1,4 +1,4 @@
-import { refreshPollImg } from "../functions";
+import { refreshPollImg } from "../functions/refreshPollImg";
 
 export class Poll {
   public title: string = "";
@@ -9,7 +9,7 @@ export class Poll {
   public voters: string[] = [];
   public created = false;
 
-  public init = (title: string, options: string[]) => {
+  public async init(title: string, options: string[]) {
     this.title = title;
     options.forEach((option) => {
       this.options.push({ name: option, votes: 0 });
@@ -17,7 +17,7 @@ export class Poll {
     this.created = true;
     refreshPollImg(this);
     return this;
-  };
+  }
 
   public vote(user: string, option: string) {
     if (this.options.map(({ name }) => name).includes(option)) {

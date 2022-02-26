@@ -4,12 +4,10 @@ import { Command } from "../core/types";
 export = {
   name: "endpoll",
   async handle() {
-    if (this.user.username !== this.channel) return;
+    if (this.viewer.username !== this.channel) return;
     else {
       poll.end();
-      this.reply(
-        `Poll created! Make sure to vote to the poll with ${handler.prefix}vote <option>!`
-      );
+      this.reply(`Poll ended!`);
     }
   },
 } as Command;
