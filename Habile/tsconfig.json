@@ -4,7 +4,7 @@
     "target": "ESNext",
     "checkJs": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    // "noImplicitAny": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",

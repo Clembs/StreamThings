@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	export const load: Load = async ({ fetch }) => {
 		const people = await fetch('/api/getPeople').then((r) => r.json());
 		return {
@@ -47,4 +47,4 @@
 	.image {
 		background-image: url('/assets/starting-soon.png');
 	}
-</style>
+</style> -->

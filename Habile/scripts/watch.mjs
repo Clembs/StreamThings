@@ -1,40 +1,39 @@
-// //@ts-check
+//@ts-check
 
-// import { execSync, spawn } from "child_process";
-// import { watch } from "chokidar";
-// import { build as esbuild } from "esbuild";
+import { build as esbuild } from 'esbuild';
+import { readdirSync, readFileSync } from 'fs';
+import { resolve } from 'path';
 
-// const build = async (/** @type {string} */ path) => {
-//   if (path) {
-//     console.log(`Updated ${path}`);
-//   }
+const { dependencies: deps } = JSON.parse(readFileSync('package.json', 'utf8'));
 
-//   // await esbuild({
-//   //   // build all files in path to index.js
-//   //   entryPoints: [path],
-//   //   // outfile: "dist/index.js",
-//   //   outdir: "dist",
-//   //   bundle: true,
-//   //   minify: true,
-//   //   format: "cjs",
-//   //   platform: "node",
-//   // }).then((result) => {
-//   //   console.log(result);
-//   // });
-//   const build = spawn("yarn", ["swc", path, "-d", `dist`], {
-//     shell: true,
-//   }).on("close", () => {
-//     console.log("Build complete");
-//     spawn("node", ["dist"], { shell: true }).stdout.on("data", (data) => {
-//       console.log(data.toString());
-//     });
-//   });
-// };
+const build = async (/** @type {string} */ path) => {
+  // load all command files
+  const files = readdirSync(resolve('./src/commands'), 'utf8').map((file) =>
+    resolve('./src/commands', file)
+  );
 
-// build("src");
+  files.forEach((file) => {
+    console.log(file);
+  });
 
-// const watcher = watch("src/**/*.ts");
+  await esbuild({
+    entryPoints: [...files, path],
+    // outfile: 'dist/index.mjs',
+    outdir: 'dist',
+    watch: {
+      onRebuild(error, result) {
+        if (error) console.error('watch build failed:', error);
+        else console.log('watch build succeeded:', result);
+      },
+    },
+    bundle: true,
+    minify: true,
+    sourcemap: true,
+    platform: 'node',
+    target: 'node16',
+    format: 'esm',
+    external: Object.keys(deps),
+  });
+};
 
-// watcher.on("change", async (path) => {
-//   build(path);
-// });
+build('./src/index.ts');

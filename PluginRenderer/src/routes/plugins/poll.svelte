@@ -33,6 +33,7 @@
 			class="poll"
 			transition:fly={{ duration: 500, delay: 500, x: -1000, opacity: 1, easing: quintInOut }}
 		>
+			<div class="poll-bg" />
 			<div class="poll-header">
 				<h2 class="poll-subtext">Poll</h2>
 				<h1 class="poll-title">{poll.title}</h1>
@@ -64,7 +65,7 @@
 				{/each}
 				<span class="poll-footer">
 					{poll.voters.length}
-					{poll.voters.length === 1 ? 'vote' : 'votes'} total • vote with ,vote &lt;letter&gt;
+					{poll.voters.length === 1 ? 'vote' : 'votes'} total • vote with ,vote [letter]
 				</span>
 			</div>
 		</div>
@@ -74,23 +75,31 @@
 <style lang="scss">
 	.poll {
 		font: 24px 'Manrope', sans-serif;
-		color: #311ca2;
-		// radial gradient from #fff to #E8E3FF
-		background: radial-gradient(circle, #fff, #f5f4ff);
-		padding: 2rem;
+		color: #000020;
 		border-radius: 35px;
 		display: flex;
 		flex-direction: column;
 		width: 441px;
-		background-color: #fafafa;
 		padding: 1.7rem;
 		font-weight: 500;
 		gap: 1rem;
+		overflow: hidden;
 
 		position: fixed;
 		bottom: 0;
 		left: 0;
 		transform: translateX(20px) translateY(-20px);
+
+		.poll-bg {
+			z-index: -1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(250, 250, 250, 0.8);
+			// backdrop-filter: blur(50px);
+		}
 
 		.poll-header {
 			.poll-subtext {
@@ -133,10 +142,11 @@
 					align-items: center;
 					width: 30px;
 					height: 30px;
-					background: #311ca2;
-					color: #fff;
+					background: #fff;
+					font-weight: bold;
+					color: #000020;
 					border-radius: 50%;
-					font-size: 1.2rem;
+					font-size: 1.4rem;
 				}
 
 				.percentage {
@@ -150,12 +160,12 @@
 				width: 100%;
 				background-color: #eaeaea;
 				border-radius: 99rem;
-				background: rgba(49, 28, 162, 20%);
+				background: rgba(0, 0, 20, 20%);
 
 				.progress-bar {
 					height: 100%;
 					width: 0%;
-					background-color: #311ca2;
+					background: linear-gradient(45deg, #8c68fc, #4c7ffc);
 					border-radius: 99rem;
 					transition: width 0.5s ease-in-out;
 				}

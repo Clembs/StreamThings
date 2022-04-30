@@ -1,8 +1,8 @@
-import { ChatUserstate, Client } from 'tmi.js';
+import { Client } from '../client/Client';
+import { ChatUserstate } from 'tmi.js';
 import { CommandData } from '.';
-import { User } from './CommandData';
 
-export type CommandHandleOptions = {
+export type CommandRawOptions = {
   channel: string;
   message: string;
   state: ChatUserstate;

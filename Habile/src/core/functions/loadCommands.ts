@@ -9,7 +9,7 @@ export const loadCommands = async (folder: string, handler: CommandStorage) => {
     if (statSync(path).isDirectory()) {
       const sub = await loadCommands(path, handler);
       for (const [name, command] of sub.commands) {
-        handler.add(name, command);
+        handler.commands.set(name, command);
       }
     } else {
       const command: Command = require(path).default ?? require(path);
@@ -17,7 +17,7 @@ export const loadCommands = async (folder: string, handler: CommandStorage) => {
         throw new Error(`Command ${command.name} already exists`);
       }
       if (command.name) {
-        handler.add(command.name, command);
+        handler.commands.set(command.name, command);
       }
     }
   }

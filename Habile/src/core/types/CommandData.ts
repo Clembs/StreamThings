@@ -1,43 +1,16 @@
-import { Client } from 'tmi.js';
-import { CommandHandleOptions } from '.';
+import { Client } from '../client/Client';
+import { CommandRawOptions } from '.';
+import { Viewer, User } from '../structures';
 
 export type RawMessageContent = string;
 
-export interface BaseUser {
-  username: string;
-  displayName: string;
-  id: string;
-  type: 'viewer' | 'mod' | 'global_mod' | 'admin' | 'staff';
-  fetchUser: (username: string) => Promise<User>;
-}
-
-export type Viewer = Omit<BaseUser, 'fetchUser'> & {
-  color?: `#${string}`;
-  subscriber: boolean;
-  turbo: boolean;
-  mod: boolean;
-  fetchUser: () => Promise<User>;
-  // ban: (reason: string) => Promise<void>;
-  // timeout: (duration: number, reason: string) => Promise<void>;
-};
-
-export type User = Omit<BaseUser, 'type' | 'fetchUser'> & {
-  type: '';
-  description: string;
-  profileImage: string;
-  bannerImage: string;
-  viewCount: number;
-  createdAt: Date;
-};
-
 export type CommandData = Omit<
-  CommandHandleOptions,
+  CommandRawOptions,
   'message' | 'self' | 'state' | 'client'
 > & {
-  client: Client & {
-    fetchUser: (username: string) => Promise<User>;
-  };
+  client: Client;
   viewer: Viewer;
+  user: User;
   id?: string;
   type: 'whisper' | 'chat' | 'action';
   commandName: string;

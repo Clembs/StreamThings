@@ -1,4 +1,4 @@
-import { Command } from 'core/types';
+import { Command } from '../core/types';
 
 export = {
   name: 'whoami',
