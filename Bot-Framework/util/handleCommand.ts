@@ -2,6 +2,7 @@ import { resolveCommandData } from './resolveCommandData';
 import { CommandRawOptions } from '../types';
 import { CommandStorage } from '../classes';
 import fetch from 'node-fetch';
+import { Util } from 'discord.js';
 
 export const handleCommand = async (
   opts: CommandRawOptions,
@@ -35,6 +36,9 @@ export const handleCommand = async (
           username: commandData.user.displayName,
           avatar_url: commandData.user.profileImage,
           content: message,
+          allowed_mentions: {
+            parse: [],
+          },
         }),
         headers: {
           'Content-Type': 'application/json',

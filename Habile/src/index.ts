@@ -1,10 +1,7 @@
 import { Client as DiscordClient } from 'discord.js';
 import 'dotenv/config';
-import { CommandStorage, Poll } from './core/classes';
-import { loadCommands, handleCommand } from './core/functions';
-import { Client } from './core/client/Client';
+import { Poll, Client } from 'core';
 
-export const handler = new CommandStorage();
 export const poll = new Poll();
 const people: string | string[] = [];
 
@@ -42,18 +39,31 @@ discord.on('messageCreate', async (message) => {
     !message.author.bot &&
     !message.webhookId
   ) {
-    client.say(
-      'clembs',
-      `[${message.author.tag}]: ${message.cleanContent.substring(0, 200)}`
-    );
+    if (message.reference) {
+      const msg = await message.fetchReference();
+      client.say(
+        'clembs',
+        `(${message.author.tag} replying to ${msg.author.tag}): ${
+          message.cleanContent.length >= 200
+            ? `${message.cleanContent.substring(0, 197)}...`
+            : message.cleanContent
+        }`
+      );
+    } else {
+      client.say(
+        'clembs',
+        `(${message.author.tag}): ${
+          message.cleanContent.length >= 200
+            ? `${message.cleanContent.substring(0, 197)}...`
+            : message.cleanContent
+        }`
+      );
+    }
   }
 });
 
 client.on('connected', async (address, port) => {
   console.log(`Connected to Twitch.tv at ${address}:${port}`);
-  await loadCommands(`${__dirname}/commands`, handler).then((handler) => {
-    console.log(`Loaded ${handler.commands.size} commands.`);
-  });
 });
 
 client.on('message', async (channel, state, message, self) => {
@@ -70,13 +80,5 @@ client.on('message', async (channel, state, message, self) => {
   //     });
   //     // console.log(await req.json());
   //   }
-  handleCommand({ channel, state, message, client, self }, handler);
+  handleCommand({ channel, state, message, client, self });
 });
-
-// client.on('join', (channel, username, self) => {
-//   console.log(username, channel);
-// });
-
-// client.on('action', (channel, state, action) => {
-//   console.log(state, action, channel);
-// });

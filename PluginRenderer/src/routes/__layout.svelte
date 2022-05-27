@@ -1,5 +1,9 @@
 <script>
+	import Screen from '$lib/components/Screen.svelte';
+
 	import '../app.css';
 </script>
 
-<slot />
+<Screen>
+	<slot />
+</Screen>

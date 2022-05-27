@@ -19,8 +19,6 @@
     "tmi.js": "^1.8.5"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.55",
-    "@swc/core": "^1.2.131",
     "@types/node": "^17.0.8",
     "@types/node-fetch": "2",
     "@types/tmi.js": "^1.8.1"

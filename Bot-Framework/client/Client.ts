@@ -1,4 +1,5 @@
 import { Client as TmiClient, Options } from 'tmi.js';
+import { Command } from '../types';
 import { UserManager } from './UserManager';
 
 export class Client extends TmiClient {
@@ -16,6 +17,8 @@ export class Client extends TmiClient {
     });
   }
 
+  public prefix = ':';
+  public commands = new Map<string, Command>();
   public users = new UserManager();
 
   public get user() {

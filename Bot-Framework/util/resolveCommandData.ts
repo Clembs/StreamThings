@@ -1,10 +1,8 @@
 import { CommandData, CommandRawOptions, RawMessageContent } from '../types';
-import { CommandStorage } from '../classes';
 import { Viewer } from '../structures/Viewer';
 
 export const resolveCommandData = async (
   opts: CommandRawOptions,
-  handler: CommandStorage,
   cmdName: string,
   args?: string[]
 ): Promise<CommandData> => {
@@ -25,7 +23,7 @@ export const resolveCommandData = async (
     reply: async (message: string): Promise<[RawMessageContent]> => {
       return await client.say(channel, message);
     },
-    commandName: cmdName.slice(handler.prefix.length),
+    commandName: cmdName.slice(client.prefix.length),
     rawContent: message,
     args,
   };
