@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "$lib/*": ["src/lib/*"],
+      "$lib": ["src/lib"]
+    },
+    "sourceMap": true,
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "NodeNext",
+    "experimentalDecorators": true,
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["esnext"],
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules", "**/*.mjs"]
+  }
+}

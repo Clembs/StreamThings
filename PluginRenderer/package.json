@@ -26,7 +26,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@nodert-win10-20h1/windows.media": "^0.1.0",
 		"concurrently": "^7.0.0",
 		"node-id3": "^0.2.3",
 		"sass": "^1.49.9"

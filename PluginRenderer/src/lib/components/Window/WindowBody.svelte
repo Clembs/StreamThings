@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { scale } from 'svelte/transition';
+
 	export let icon: string;
 	export let label: string;
 	export let width = '100%';
@@ -8,6 +10,7 @@
 
 <div class="flex {typeof position === 'string' ? position.split('-')[0] : ''}">
 	<div
+		transition:scale={{}}
 		class="window-body {typeof position === 'string' ? position.split('-')[1] : 'absolute'}"
 		style="--width: {width}; --height: {height}; --position-x: {typeof position === 'string'
 			? ''
@@ -33,6 +36,9 @@
 <style lang="scss">
 	.flex {
 		display: flex;
+		position: absolute;
+		top: 0;
+		left: 0;
 		flex-direction: column;
 		height: 100%;
 		width: 100%;

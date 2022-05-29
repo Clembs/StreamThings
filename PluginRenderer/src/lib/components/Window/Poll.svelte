@@ -1,19 +1,12 @@
 <script lang="ts">
-	import { quintInOut } from 'svelte/easing';
-
-	import { fly } from 'svelte/transition';
-
-	import type { Poll } from '../../../../../Habile/src/core/classes';
+	import type { Poll } from '../../../../../Habile/src/lib/classes/Poll';
 	export let poll: Poll = null;
 
 	import WindowBody from './WindowBody.svelte';
 </script>
 
 <WindowBody label="Poll" icon="Habile" position="bottom-left" width="441px">
-	<div
-		class="poll"
-		transition:fly={{ duration: 500, delay: 500, x: -1000, opacity: 1, easing: quintInOut }}
-	>
+	<div class="poll">
 		<h1 class="poll-title">{poll.title}</h1>
 		<div class="poll-options">
 			{#each poll.options as option, i}
