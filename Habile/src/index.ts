@@ -1,6 +1,7 @@
 import { Client as DiscordClient } from 'discord.js';
 import 'dotenv/config';
-import { Poll, Client } from 'core';
+import { Client } from 'core';
+import { Poll } from '$lib/classes/Poll';
 
 export const poll = new Poll();
 const people: string | string[] = [];
