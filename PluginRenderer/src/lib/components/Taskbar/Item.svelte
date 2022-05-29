@@ -1,15 +1,12 @@
 <script lang="ts">
 	export let state: 'inactive' | 'active' | 'idle';
-	export let showLabel = true;
-	export let icon: string = '';
+	export let hideLabel = false;
 </script>
 
-<div class="item {state}" class:labelless={!showLabel}>
+<div class="item {state}" class:labelless={hideLabel}>
 	<div class="item-row">
-		{#if icon}
-			<img alt="" src="/assets/icons/{icon}.svg" />
-		{/if}
-		{#if showLabel}
+		<slot name="icon" />
+		{#if !hideLabel}
 			<div class="item-label">
 				<p><slot /></p>
 			</div>
@@ -20,6 +17,7 @@
 <style lang="scss">
 	.item {
 		margin: 8px;
+		transition: width 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 
 		.item-row {
 			display: flex;
@@ -28,21 +26,32 @@
 			align-items: center;
 			padding: 0px 11px;
 			border-radius: 99rem;
+			gap: 11px;
 
+			:global([slot='icon']) {
+				width: 30px;
+				height: 30px;
+			}
 			.item-label {
 				font-size: 20px;
 				font-weight: 600;
 				font-family: 'Manrope';
-				p {
+				& > p {
 					margin-block-end: 0;
 					margin-block-start: 0;
+					max-width: 300px;
+					white-space: nowrap;
+					overflow: hidden;
+					display: inline-block;
+					text-overflow: ellipsis;
+					transform: translateY(2px);
 				}
 			}
 		}
 	}
 
-	.item:not(.labelless) .item-row {
-		gap: 11px;
+	.item.labelless .item-row {
+		gap: 0px;
 	}
 
 	.inactive {
