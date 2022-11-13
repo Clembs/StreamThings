@@ -4,7 +4,7 @@ import fs from 'fs';
 import NodeID3 from 'node-id3';
 
 export const get: RequestHandler = () => {
-	const filePath = './static/BGM';
+	const filePath = './static/BGM/current';
 
 	const songs = fs.readdirSync(filePath);
 
@@ -17,6 +17,7 @@ export const get: RequestHandler = () => {
 				author: tags.artist,
 				fileName: song,
 				title: tags.title,
+				playing: null,
 			} as Song;
 		})
 		.sort((a, b) => Math.random() - 0.5);

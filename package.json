@@ -7,11 +7,14 @@
     "plugins": "yarn workspace plugins dev"
   },
   "workspaces": [
-    "Bot-Framework",
-    "Habile",
-    "PluginRenderer"
+    "./packages/Bot-Framework",
+    "./packages/Habile",
+    "./packages/PluginRenderer"
   ],
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "node-id3": "^0.2.3",
+    "ytdl-core": "^4.11.2"
   }
 }

@@ -1,9 +1,17 @@
 <script>
-	import Screen from '$lib/components/Screen.svelte';
-
 	import '../app.css';
 </script>
 
-<Screen>
+<main>
 	<slot />
-</Screen>
+</main>
+
+<style lang="scss">
+	main {
+		width: 100vw;
+		height: 100vh;
+		// padding: 20px;
+		z-index: -1;
+		overflow: hidden;
+	}
+</style>

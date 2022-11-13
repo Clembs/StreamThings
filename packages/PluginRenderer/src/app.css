@@ -25,6 +25,17 @@ body {
 	padding: 0;
 	font-family: sans-serif;
 	font-size: 16px;
-	font-family: 'Manrope';
+	font-family: 'Figtree';
 	font-weight: 600;
+	background-color: black;
+}
+
+.blink {
+	animation: blink 1.5s steps(2, start) infinite;
+}
+
+@keyframes blink {
+	to {
+		visibility: hidden;
+	}
 }

@@ -12,10 +12,12 @@
 	}
 </script>
 
-<Item state="inactive">
-	<img class="spin" alt="" slot="icon" src="/assets/icons/Disk.svg" />
-	{nowPlaying?.title} • {nowPlaying?.author}
-</Item>
+{#if nowPlaying && nowPlaying?.playing}
+	<Item>
+		<img class="spin" alt="" slot="icon" src="/assets/icons/Disk.svg" />
+		{nowPlaying?.title} • {nowPlaying?.author}
+	</Item>
+{/if}
 
 <style lang="scss">
 	.spin {

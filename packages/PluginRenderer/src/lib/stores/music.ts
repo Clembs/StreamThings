@@ -5,6 +5,7 @@ export type Song = {
 	author: string;
 	title: string;
 	cc?: 'cc-3.0' | 'illegal' | null;
+	playing: boolean | null;
 };
 
 export const nowPlaying = writable<Song>(null);

@@ -36,7 +36,6 @@
 <style lang="scss">
 	.flex {
 		display: flex;
-		position: absolute;
 		top: 0;
 		left: 0;
 		flex-direction: column;

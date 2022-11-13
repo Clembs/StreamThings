@@ -6,7 +6,7 @@ export const get: RequestHandler = () => {
 	const data = storeGet(nowPlaying);
 
 	return {
-		body: data ?? storeGet(playlist)[0],
+		body: data ?? { ...storeGet(playlist)[0], playing: true },
 	};
 };
 

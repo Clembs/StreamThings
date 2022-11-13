@@ -39,7 +39,7 @@
 
 <style lang="scss">
 	.poll {
-		font: 24px 'Manrope', sans-serif;
+		font-size: 24px;
 		color: #000020;
 		display: flex;
 		flex-direction: column;
