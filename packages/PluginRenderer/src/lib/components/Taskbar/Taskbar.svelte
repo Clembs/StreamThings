@@ -17,6 +17,14 @@
 		left: 0;
 		z-index: -1;
 
+		> :global(*:last-child),
+		> :global(*:first-child) {
+			width: 400px;
+		}
+		> :global(*:is(:last-child) .item-row) {
+			justify-content: flex-end;
+		}
+
 		&.hide {
 			transform: translateY(100%);
 			transition: transform 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);

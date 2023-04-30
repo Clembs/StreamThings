@@ -1,14 +1,13 @@
 <script lang="ts">
 	import Taskbar from '$lib/components/Taskbar/Taskbar.svelte';
 	import Item from '$lib/components/Taskbar/Item.svelte';
-	import NowPlayingItem from '$lib/components/Taskbar/NowPlayingItem.svelte';
 	import { readable } from 'svelte/store';
 
 	const links = [
-		['discord', 'clembs.com/discord'],
+		['discord', 'discord.gg/6uNwP46'],
 		['twitch', 'twitch.tv/clembs'],
 		['youtube', 'youtube.com/@ReClembs'],
-		['donate', 'clembs.com/donate'],
+		['donate', 'ko-fi.com/clembs'],
 	];
 
 	let hide = false;
@@ -19,25 +18,30 @@
 	const hour = readable(new Date(), (set) => {
 		setInterval(() => set(new Date()), 10000);
 	});
+
+	const date = new Intl.DateTimeFormat('en-US', {
+		day: '2-digit',
+		month: 'short',
+		year: 'numeric',
+	});
 </script>
 
 <Taskbar {hide} solid>
-	<Item>
+	<!-- <Item>
 		<img alt="" slot="icon" src="/assets/icons/Habile.svg" />
 		Latest follower
-	</Item>
-	<NowPlayingItem />
+	</Item> -->
 	<Item>
 		<img src="/assets/icons/{links[currentLink][0]}.svg" alt="" slot="icon" />
 		{links[currentLink][1]}
 	</Item>
 	<Item>
-		<img alt="" slot="icon" src="/assets/icons/Clock.svg" />
+		{date.format(new Date())} •
 		{@html $hour
 			.toLocaleTimeString('fr', {
 				hour: '2-digit',
 				minute: '2-digit',
 			})
-			.replace(':', '<span class="blink">:</span>')}</Item
-	>
+			.replace(':', '<span class="blink">:</span>')}
+	</Item>
 </Taskbar>
